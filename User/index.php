@@ -62,7 +62,7 @@ try {
                     <thead>
                         <th>ID</th>
                         <th>Email</th>
-                        <th>Rôle</th>
+                        <th>Rôles</th>
                     </thead>
                     <tbody>
                         <?php
@@ -72,6 +72,7 @@ try {
                             <tr>
                                 <td><?= $user->getId() ?></td>
                                 <td><?= $user->getEmail() ?></td>
+                                <td><?= $user->getRoles() ?></td>
                                 <td><a href="details.php?id=<?= $user->getId() ?>">Voir</a> <a href="edit.php?id=<?= $user->getId() ?>">Modifier</a> <a href="remove.php?id=<?= $user->getId() ?>">Supprimer</a></td>
                             </tr>
                         <?php

@@ -28,7 +28,7 @@ try {
             $id = strip_tags($_POST['id']);
             $email = strip_tags($_POST['email']);
 
-            $user = $manager->getOneById($id);
+            $user = $manager->getOne($id);
 
             // On vérifie si le type existe
             if (!$user) {
@@ -45,7 +45,7 @@ try {
             $manager->update($user);
 
             // On rédige le message qui sera affiché à l'utilisateur
-            $_SESSION['message'] = "User modifié";
+            $_SESSION['message'] = "Utilisateur  modifié";
 
             // On renvoie vers la page principale
             header('Location: index.php');
@@ -64,7 +64,7 @@ try {
         // On nettoie l'id envoyé
         $id = strip_tags($_GET['id']);
 
-        $user = $manager->getOneById($id);
+        $user = $manager->getOne($id);
 
         // On vérifie si le type existe
         if (!$user) {
@@ -116,6 +116,8 @@ try {
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="text" id="email" name="email" class="form-control" value="<?= $user->getEmail() ?>">
+                        <label for="email">Rôles</label>
+                        <input type="text" id="roles" name="roles" class="form-control" value="<?= $user->getRoles() ?>">
                     </div>
                     <input type="hidden" value="<?= $user->getId() ?>" name="id">
                     <button class="btn btn-primary">Enregistrer</button>

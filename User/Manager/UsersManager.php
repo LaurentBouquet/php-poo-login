@@ -27,21 +27,27 @@ class UsersManager {
     public function add(User $user):bool
     {
         // Préparation de la requête d'insertion.
-        // Assignation des valeurs pour le email, la force, les dégâts, l'expérience et le passwd du user.
-        // Exécution de la requête.
-        $query = $this->_db->prepare('INSERT INTO `tbl_users` (`email`, `passwd`) VALUES (:email, :passwd);');
+        $query = $this->_db->prepare('INSERT INTO `tbl_users` (`email`, `passwd`) 
+                                       VALUES (:email, :passwd);');
+
+        // Assignation des valeurs de l'utilisateur.
         $query->bindValue(':email', $user->getEmail());
         $query->bindValue(':passwd', $user->getPassword());
 
+        // Exécution de la requête.
         return $query->execute();
     }
 
-    public function delete(User $user):bool
+    public function remove(User $user):bool
     {
         // Préparation de la requête d'insertion.
-        // Assignation des valeurs pour le email, la force, les dégâts, l'expérience et le passwd du user.
+        $query = $this->_db->prepare("DELETE FROM tbl_users WHERE id = :id;");
+
+        // Assignation des valeurs.
+        $query->bindValue(':id', $user->getId());
+
         // Exécution de la requête.
-        return false;
+        return $query->execute();
     }
 
     public function getOne(int $id)
@@ -69,9 +75,13 @@ class UsersManager {
     public function update(User $user):bool
     {
         // Prépare une requête de type UPDATE.
+        $query = $this->_db->prepare('UPDATE `tbl_users` SET `email`=:email, `roles`=:roles WHERE `id`=:id;');
         // Assignation des valeurs à la requête.
+        $query->bindValue(':email', $user->getEmail());
+        $query->bindValue(':roles', $user->getRoles());
+        $query->bindValue(':id', $user->getId());
         // Exécution de la requête.
-        return false;
+        return($query->execute());
     }
 
 

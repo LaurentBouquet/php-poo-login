@@ -25,7 +25,7 @@ try {
         // On nettoie l'id envoyé
         $id = strip_tags($_GET['id']);
 
-        $user = $manager->getOneById($id);
+        $user = $manager->getOne($id);
 
         // On vérifie si le type existe
         if (!$user) {
@@ -38,10 +38,13 @@ try {
         }
 
         // Supprimer le type
-        $manager->remove($user);
-
-        // On rédige le message qui sera affiché à l'utilisateur
-        $_SESSION['message'] = "User supprimé";
+        if ($manager->remove($user)) {
+            // On rédige le message qui sera affiché à l'utilisateur
+            $_SESSION['message'] = "Utilisateur supprimé";
+        } else {
+            // On rédige le message d'erreur
+            $_SESSION['error'] = "Une erreur est intervenue";
+        };
 
         // On renvoie vers la page principale
         header('Location: index.php');

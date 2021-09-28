@@ -8,13 +8,13 @@ class User
     private $_password;
     private $_roles;
 
-    public function __construct(array $ligne)
+    public function __construct(array $ligne=null)
     {
         $this->hydrate($ligne);
     }
 
     // Un tableau de données doit être passé à la fonction (d'où le préfixe "array").
-    public function hydrate(array $ligne)
+    public function hydrate(?array $ligne)
     {
         foreach ($ligne as $key => $value) {
             $method = 'set'.ucfirst($key);
@@ -64,7 +64,7 @@ class User
      */
     public function setPassword($password)
     {
-        $this->_password = $password;
+        $this->_password = password_hash($password, PASSWORD_BCRYPT);
 
         return $this;
     }
@@ -84,6 +84,9 @@ class User
      */
     public function setRoles($roles)
     {
+        if (empty($roles)) {
+            $roles = "ROLE_USER";
+        }
         $this->_roles = $roles;
 
         return $this;

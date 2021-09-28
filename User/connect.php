@@ -25,7 +25,7 @@ try {
             $email = strip_tags($_POST['email']);
             $passwd = strip_tags($_POST['passwd']);
 
-            // Ajouter un utilisateur
+            // Se connecter
             $user = new User();
             $user->setEmail($email);
             $user->setPassword($passwd);
@@ -59,7 +59,7 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajouter un utilisateur</title>
+    <title>Se connecter</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
@@ -76,7 +76,7 @@ try {
                     $_SESSION['error'] = "";
                 }
                 ?>
-                <h1>Ajouter un utilisateur</h1>
+                <h1>Se connecter</h1>
                 <form method="post">
                     <div class="form-group">
                         <label for="email">Email</label>
@@ -84,7 +84,7 @@ try {
                         <label for="passwd">Mot de passe</label>
                         <input type="password" id="passwd" name="passwd" class="form-control">
                     </div>
-                    <button class="btn btn-primary">Enregistrer</button>
+                    <button class="btn btn-primary">Se connecter</button>
                 </form>
             </section>
         </div>
